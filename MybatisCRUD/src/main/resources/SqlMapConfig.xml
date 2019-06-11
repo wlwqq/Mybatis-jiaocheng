@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<!-- mybatis的主配置文件 -->
+<configuration>
+    <properties resource="jdbc.properties"></properties>
+    <typeAliases>
+        <typeAlias type="com.wanglei.domain.User" alias="user"></typeAlias>
+        <package name="com.wanglei.domain"></package>
+    </typeAliases>
+    <!-- 1.配置环境 -->
+    <environments default="mysql">
+        <environment id="mysql">
+            <!-- 配置事务的类型-->
+            <transactionManager type="JDBC"></transactionManager>
+            <!-- 配置数据源（连接池） -->
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"></property>
+                <property name="url" value="${jdbc.url}"></property>
+                <property name="username" value="${jdbc.username}"></property>
+                <property name="password" value="jdbc.password"></property>
+            </dataSource>
+        </environment>
+    </environments>
+    <!-- 2.指定Dao的mapper文件 -->
+    <mappers>
+        <!--<mapper resource="com/wanglei/dao/UserDao.xml"></mapper>-->
+        <package name="com.wanglei.dao"></package>
+    </mappers>
+</configuration>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wanglei.dao.UserDao">
+
+    <resultMap id="UserMap" type="com.wanglei.domain.User1">
+        <id property="userId" column="id"></id>
+        <result property="userName" column="username"></result>
+        <result property="userBirthday" column="birthday"></result>
+        <result property="userSex" column="sex"></result>
+        <result property="userAddress" column="address"></result>
+    </resultMap>
+
+    <select id="findUser1ById" resultMap="UserMap" parameterType="Integer">
+        select * from user where id=#{userId}
+    </select>
+
+
+
+    <insert id="saveUser" parameterType="com.wanglei.domain.User">
+        insert into user(username,birthday,sex,address) values(#{username},#{birthday},#{sex},#{address})
+    </insert>
+
+    <delete id="deleteUser" parameterType="Integer">
+        delete from user where id=#{id}
+    </delete>
+
+    <update id="updateUser" parameterType="com.wanglei.domain.User">
+        update user set username=#{username},birthday=#{birthday},sex=#{sex},address=#{address} where id=#{id}
+    </update>
+
+    <select id="findById" parameterType="Integer" resultType="com.wanglei.domain.User">
+        select * from user where id=#{id}
+    </select>
+
+    <select id="findByName" parameterType="String" resultType="com.wanglei.domain.User">
+        select * from user where username like #{username}
+    </select>
+
+    <select id="findTotal" resultType="Integer">
+        select count(id) from user
+    </select>
+
+    <select id="findByVo" parameterType="com.wanglei.domain.Queryvo" resultType="com.wanglei.domain.User">
+        select * from user where username like #{user.username}
+    </select>
+</mapper>
